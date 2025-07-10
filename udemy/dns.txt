@@ -1,0 +1,34 @@
+dns config is at:
+/etc/resolv.conf
+you find there: 
+search domain-name-i-append-to-searches, (list)
+nameserver - ip of dns server
+
+----
+how to know what dns server resolved some host name?
+nslookup
+dig
+--
+/etc/osts file take percendence , this order can be changed and defind in /etc/nsswitch.conf , hosts entry = hosts:      files dns myhostname
+
+----
+in the dns server configs. there are ip - host pairs, and also entry to forward all unknown hosts to another dns server ( ike google dns server at 8.8.8.8 ) 
+
+
+----
+DOMAINS: .com, .io. .enu - these are Top Level Domains 
+google - domain name,
+www - subdomain, domain can have many subdomains like maps.google.com, translate.google.com
+
+--
+records in dns server have types:
+A = hostnam : ip pair  
+AAAA = hostname : upv6
+CNAME = hostname1 : hostname2 (example, i have few aliases for same application , i want my food to reachable at : hungry, eat, )
+default port for dns server is 53
+
+  dig @localhost google.com - use dig and force specific dns ( this, coredns running on localhost:53 ) 
+  dig google.com @8.8.8.8             # UDP
+dig +tcp google.com @8.8.8.8        # TCP
+  
+  
