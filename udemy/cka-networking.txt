@@ -1,1 +1,40 @@
+ifconfig
+
+interfaces management: 
+
 ip link
+ip addr
+ip addr add 192.168.1.11/24 dev lo
+ip addr show lo
+
+--------
+route table management: 
+route / ip route
+ip route add 1.1.1.1 via 127.0.0.1
+-------------
+arp
+
+
+
+----------------
+utils:
+ipcalc :
+ipcalc <IP>
+ipcalc <IP>/<subnet>
+
+
+--- 
+ping 
+traceroute
+mtr
+telnet
+nc / ncat 
+curl 
+wget
+dig
+host
+nslokup
+
+-----
+can a host forward packets from one interface to the other ? 
+cat /proc/sys/net/ipv4/ip_forward
