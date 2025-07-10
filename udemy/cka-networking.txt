@@ -3,18 +3,39 @@ ifconfig
 interfaces management: 
 
 ip link
+ip link set dev ens5 down
 ip addr
 ip addr add 192.168.1.11/24 dev lo
+ip addr del 192.168.0.1 dev ens5
 ip addr show lo
 -------
 ip neigh show
 --------
 route table management: 
+destination - where you wanna reach? what ip ?         |  gateway -> through what you will reach it ?  | genmask - mask to match ip addresses to the destination ( that can be network name ) | fmetric- lower metric will be preferred 
+default = 0.0.0.0 |  <router ip>                                                                      |   0.0.0.0    match all ips                                                            |
+router_ip         |  0.0.0.0 <- reachable in same network, dont go through a route                    |  255.255.255.255 - match exact ip                                                     | 
+
+
+Flag	Meaning
+U	Route is up (enabled)
+G	Route uses a gateway
+H	Target is a host (not a network) — used with a /32 route
+D	Route was dynamically installed (e.g. by DHCP)
+M	Route was modified by redirect
+
+
 route / ip route
 ip route add 1.1.1.1 via 127.0.0.1
+ ip route get 1.1.1.1
+see what is _gateway alias from route table
+[ec2-user@ip-10-9-8-13 ~]$ getent hosts _gateway
+10.9.8.1        _gateway
+[ec2-user@ip-10-9-8-13 ~]$
 -------------
 arp
-
+arp -a
+neigh
 
 
 ----------------
@@ -37,5 +58,51 @@ host
 nslokup
 
 -----
-can a host forward packets from one interface to the other ? 
+can a host forward packets from one interface to the other ? ( from ens5 to ens6 ) 0=false, 1=true
 cat /proc/sys/net/ipv4/ip_forward
+---
+force a request to go from some interface : 
+ping -I ens6 10.9.8.1
+curl --interface ens6 http://.
+
+-------
+up some server:
+python3 -m http.server 8080 --bind 0.0.0.0
+nc -lk 0.0.0.0 8080
+
+-----
+ICMP - ping, traceroute , 
+TCP - HTTP, telnet = need also a port!!!!
+
+
+----
+telnet:
+Check if a TCP port is reachable (like HTTP on port 80 or 8080).
+telnet <host> <port>
+Telnet uses TCP
+
+traceroute:
+Trace the path packets take from your machine to the destination — useful for debugging network routes.
+
+traceroute 10.9.8.4
+By default, Linux traceroute uses UDP
+
+You can force it to use ICMP:
+traceroute -I 10.9.8.4
+
+-----
+ NAME RESULUTION : curl, ssh, ping.....
+curl: curl: (6) Could not resolve host =
+to resolv host: 
+dig <host>
+dig +short <host> -> dont use /etc/hosts
+or :
+nslookup <host> -> dont use /etc/hosts
+or:
+host google.com
+or:
+getent hosts <host>
+------
+find out my private IP:
+hostname -I
+
