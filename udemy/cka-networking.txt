@@ -6,7 +6,8 @@ ip link
 ip addr
 ip addr add 192.168.1.11/24 dev lo
 ip addr show lo
-
+-------
+ip neigh show
 --------
 route table management: 
 route / ip route
