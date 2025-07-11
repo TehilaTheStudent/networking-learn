@@ -30,5 +30,6 @@ default port for dns server is 53
   dig @localhost google.com - use dig and force specific dns ( this, coredns running on localhost:53 ) 
   dig google.com @8.8.8.8             # UDP
 dig +tcp google.com @8.8.8.8        # TCP
-  
+----
+DNS is s protocol that uses udp / tcp
   
