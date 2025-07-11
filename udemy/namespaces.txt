@@ -17,4 +17,26 @@ ip netns add <name of namespace
 list namespaces:
 ip netns
 run commands inside a namespace:
-ip netns exec red <ip link>
+ip netns exec red <ip link>  ( or : ip -n red link , this is only for the ip command tough,)
+example: 
+ip netns exec red hostname -i
+
+establish connectivity between the red and blue namespace:
+ip link add veth-red type veth peer name veth-vlue
+than run ip link 
+than attach to the namespaces:
+ ip link set veth-red netns red
+  ip link set veth-blue netns blue
+  run ip link again inside the namespaces and see the new interface on both 
+
+assign ip's to the namespaces : 
+run inside the namespaces : 
+ ip addr add 192.168.0.2 dev veth-red
+ ( note: to del ip : ip addr del )
+
+ now bring the interface up by, run inside the namespaces:
+  ip link set veth-red up
+   ip link set veth-blue up
+note: the ip's have to be in same network, not to have a CIDR of 32
+now namespaces can ping each other,
+look in the arp table of each one after you ping

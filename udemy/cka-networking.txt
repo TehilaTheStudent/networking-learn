@@ -35,6 +35,7 @@ see what is _gateway alias from route table
 -------------
 arp
 arp -a
+arp -n ( -n to not resolve ips to hostnames )
 neigh
 
 
