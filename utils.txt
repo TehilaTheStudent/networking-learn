@@ -1,0 +1,3 @@
+lsmod
+iptables 
+sudo iptables -L -v -n = show firewall rules 
