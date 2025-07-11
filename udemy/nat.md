@@ -7,8 +7,8 @@ This cheat sheet covers practical and comprehensive `iptables` NAT use for labs 
 ## 🔍 View NAT Rules
 
 ```bash
-iptables -t nat -L -n -v          # List all NAT rules with counters
-iptables -t nat -S                # Show NAT rules in iptables-save style
+iptables -t nat -L -n -v   / iptables --table nat --list --numeric --verbose       # List all NAT rules with counters
+iptables -t nat -S       / iptables --table nat --list-rules         # Show NAT rules in iptables-save style
 ```
 
 ---
