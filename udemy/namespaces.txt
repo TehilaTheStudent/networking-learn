@@ -8,4 +8,13 @@ bridge
 --
 experiment:
 create containers, see if they can talk, they get bridge network, and new stuff created on host, see with ip link
-h
+
+
+----
+namespace management:
+add namespace:
+ip netns add <name of namespace
+list namespaces:
+ip netns
+run commands inside a namespace:
+ip netns exec red <ip link>
