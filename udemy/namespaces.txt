@@ -1,3 +1,5 @@
+install docker,
+new interface is added, docker0, and new entry in route table how to reach this network
 types of networks in docker:
 none
 host
