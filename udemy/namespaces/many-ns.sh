@@ -49,3 +49,6 @@ ip netns exec blue ip route
 # if we ping now, we wont get a response,  sudo ip netns exec red ping 10.9.8.8
 # we need nat
 iptables -t nat -A POSTROUTING -s 192.168.15.0/24 -j MASQUERADE
+
+sudo iptables -A FORWARD -i v-net-0 -j ACCEPT
+sudo iptables -A FORWARD -o v-net-0 -j ACCEPT
