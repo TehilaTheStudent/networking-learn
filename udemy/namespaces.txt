@@ -40,3 +40,34 @@ run inside the namespaces :
 note: the ip's have to be in same network, not to have a CIDR of 32
 now namespaces can ping each other,
 look in the arp table of each one after you ping
+
+-----
+now we connected only 2 together, how to connect more? we need virtual switch ,
+use linux bridge
+ ip link add v-net-0 type bridge
+ see it in ip link on the host
+ set it up:
+ ip link set dev v-net-0 up
+ we dont need this interface anymore, delete it one ns and the other end gets deleted automatically:
+  ip netns exec red ip link del veth-red
+
+now create 'cables' to connect each ns to the virual switch:
+ip link add veth-red type veth peer name veth-red-bridge (not: name cant be long) 
+run ip link command to see the created stuff
+now attach those 'cables = interfaces' to the ns:
+ip link set veth-red netns red ( attach one side to red ns)
+ ip link set veth-red-bridge master v-net-0 ( attach second side the v-net-0 )
+ ip link set veth-blue netns blue
+ ip link set veth-blue-bridg master v-net-0
+ now set ip addresses to those interfaces / links : 
+ ip netns exec red ip addr add 192.168.15.2 dev veth-red
+ ip netns exec blue ip addr add 192.168.15.3 dev veth-red
+ now set the interfaces up:
+ sudo ip netns exec red ip link set veth-red up
+ sudo ip netns exec blue ip link set veth-blue up
+
+// set up the end at the host
+sudo ip link set veth-red-br up
+
+//reminder : the file responsible to allow packets go from one interface to the other 
+/proc/sys/net/ipv4/ip_forward
