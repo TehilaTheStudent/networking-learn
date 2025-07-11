@@ -1,1 +1,8 @@
+types of networks in docker:
+none
+host
+bridge
 
+--
+experiment:
+create containers, see if they can talk, they get bridge network, and new stuff created on host, see with ip link
