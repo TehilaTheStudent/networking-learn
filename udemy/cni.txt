@@ -1,0 +1,16 @@
+exersize:
+relevant commands:
+netstat -plnt
+cat /proc/sys/net/ipv4/ip_forward
+
+---
+as you are on some node, you can ssh another node
+
+on wht port listens...
+netstat -tlnp
+
+Notice that ETCD is listening on two ports. Which of these have more client connections established?
+Run the command: netstat -anp | grep etcd
+
+
+see : /etc/cni/net.d/....conflist

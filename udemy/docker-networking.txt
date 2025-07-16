@@ -1,0 +1,14 @@
+host,none,bridge
+create a container in the bridge, 
+sudo mkdir -p /var/run/netns
+sudo ln -s /proc/12345/ns/net /var/run/netns/mydocker
+and you can see namespace in ip netns, and exec into it 
+ip link - see that each container wih bridge network has a cable with master docker0 
+you can recognize pairs by number- odd and even form a pair, like  vethcdeb88a@if6  eth0@if7
+host port forwarding works ? 
+create a nat rule to the pre-routing chain: change the dest from 8080 to 80
+iptables -t nat -A PREROUTING -j DNAT --dport 8080 --to-destination 80
+docker does it like this:
+iptables -t nat -A DOCKER -j DNAT --dport 8080 --to-destination pod-ip:80
+list iptables rules to see the rule docker created: 
+ iptables -nvL -t nat
