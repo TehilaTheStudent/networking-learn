@@ -1,0 +1,7 @@
+/kind
+/etc/kubernetes
+/etc/config.toml
+/etc/crictl.yaml
+/etc
+/var/lib/kubelet/config.yaml
+/etc/containerd/config.toml
