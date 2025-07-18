@@ -362,7 +362,7 @@ if [ -n "$REACHABLE_FROM_HOST" ]; then
   # to reach from REACHABLE_FROM_HOST to ns:
   # 1. add a route to reach ns from REACHABLE_FROM_HOST
   # or
-  # 2. add in nat table PREROUTING rule from port 8080 to ns-ip:8080 --jump DNAT
+  # 2. add in nat table PREROUTING rule from port 8080 to ns-ip:8080 --jump DNAT ( port forward basically !)
   # sudo iptables --table nat --append PREROUTING --protocol tcp --destination-port 8080 --jump DNAT --to-destination 192.168.15.1:8080
   
   # cleanup for changes in iptables
