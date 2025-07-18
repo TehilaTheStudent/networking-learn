@@ -6,3 +6,6 @@ curl --interface ens5 https://example.com
 sudo tcpdump -i any tcp port 443
 get route entry by ip :  ip route get 172.17.0.3
 see from what interface a call will go! ip route get <ip>
+ss -tupn = This shows live TCP connections and the local IP + port used — helps identify which interface is in use.
+
+
